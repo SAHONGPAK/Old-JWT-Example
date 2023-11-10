@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.jwt.model.dao.BoardDao">
+	<select id="selectAll" resultType="list">
+		SELECT * FROM board
+	</select>
+	
+	<select id="selectByTitle" parameterType="String" resultType="list">
+		SELECT * FROM board WHERE title LIKE '%#{keyword}%'
+	</select>
+	
+	<select id="selectByContents" parameterType="String" resultType="list">
+		SELECT * FROM board WHERE contents LIKE '%#{keyword}%'
+	</select>
+	
+	<select id="selectByUserName" parameterType="String" resultType="list">
+		SELECT * FROM board WHERE user_name LIKE '%#{keyword}%'
+	</select>
+	
+	<select id="selectById" parameterType="Integer" resultType="boardDto">
+		SELECT * FROM board WHERE id = #{id}
+	</select>
+	
+	<insert id="insert" parameterType="boardDto">
+		INSERT INTO board (id, title, contents, user_name, create_date, modify_date)
+		VALUES (0, #{title}, #{contents}, #{userName}, now(), now())
+	</insert>
+	
+	<update id="update" parameterType="boardDto">
+		UPDATE board
+		SET title = #{title}, contents=#{contents}, modify_date = now()
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM board
+		WHERE id = #{id}
+	</delete>
+</mapper>

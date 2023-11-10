@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.jwt.model.dao.AuthDao">
+	<select id="select" resultType="authDto">
+		SELECT * FROM `refresh-token` WHERE user_id=#{userId}
+	</select>
+	
+	<insert id="insert" parameterType="authDto">
+		INSERT INTO `refresh-token` (user_id, token) VALUES(#{userId}, #{refreshToken})
+	</insert>
+	
+	<update id="update" parameterType="authDto">
+		UPDATE `refresh-token` SET token=#{refreshToken} WHERE user_id=#{userId}
+	</update>
+	
+</mapper>
